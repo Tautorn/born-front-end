@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+/*@import "~bootstrap/dist/css/bootstrap.css";*/
+
+@font-face {
+  font-family: zupFont;
+  src: url('assets/Sansation_Regular.ttf');
+}
+
+body {
+  margin: 0;
+}
