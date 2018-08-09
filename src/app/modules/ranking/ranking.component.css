@@ -1,0 +1,53 @@
+.container {
+  background-image: url('../../../assets/ranking.jpg');
+  padding: 1px;
+  height: 100vh;
+  width: 100vw;
+}
+
+.content {
+  width: 80%;
+  margin: auto;
+}
+
+table {
+  width: 100%;
+  color: #ffffff;
+  font-size: 2em;
+}
+
+thead {
+  line-height: 2.5;
+  color: #fd551c;
+}
+
+tbody tr {
+  line-height: 1.5;
+  color: #ffffff;
+}
+
+tbody tr:nth-child(2n) {
+  color: #8ebc00;
+}
+
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.img-iphone {
+  width: 100vw;
+  height: 100vh;
+}
+
+.title-ranking {
+  color: #8ebc00;
+}
+
+body {
+
+}

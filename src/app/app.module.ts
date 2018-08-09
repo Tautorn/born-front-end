@@ -10,15 +10,20 @@ import {AngularFireDatabaseModule} from 'angularfire2/database';
 import {RouterModule} from '@angular/router';
 import {Routes} from '@angular/router/src/config';
 import {HomeComponent} from './modules/home/home.component';
+import {RankingComponent} from './modules/ranking/ranking.component';
+import {RankingService} from './modules/ranking/ranking.service';
+import {BestScoreManager} from './modules/home/app.storage.service';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'ranking', component: RankingComponent},
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    RankingComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -32,7 +37,7 @@ const appRoutes: Routes = [
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [RankingService, BestScoreManager],
   bootstrap: [AppComponent]
 })
 export class AppModule {

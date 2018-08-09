@@ -1,0 +1,25 @@
+<div class="container">
+
+  <div class="content" >
+    <h1 class="text-center title-ranking">Ranking Geral</h1>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="text-left">NOME</th>
+        <th class="text-center">PONTOS</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let intern of listRanking | async">
+        <td class="text-left">
+          {{intern.name}}
+        </td>
+        <td class="text-center">
+          {{intern.score}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
