@@ -1,6 +1,8 @@
 <div class="game-container">
+  <h3 class="logo">{{this.name}}</h3>
   <div class="game-header">
-    <h3 class="logo">Zup Snake</h3>
+    <h3 class="logo">Zup Snake </h3>
+
     <div class="score-block">
       <h3 class="score" [ngClass]="{'new-best-score': newBestScore}">Score: {{score}}</h3>
       <h3 class="best-score" [ngClass]="{'new-best-score': newBestScore}">Best Score: {{best_score}}</h3>
@@ -9,5 +11,9 @@
   <div class="row" *ngFor="let column of board; let i = index;">
     <div class="column" [ngStyle]="{'background-color': setColors(i, j)}" *ngFor="let row of column; let j = index"></div>
   </div>
-  <div class="start-button" [ngClass]="{'disable-clicks': gameStarted}" (click)="newGame('classic')">Start Game</div>
+  <div class="start-button" [ngClass]="{'disable-clicks': gameStarted}" (click)="showMenuChecker ? showMenu() : newGame('classic')">Start Game</div>
+  <div class="new-game-menu" *ngIf="showMenuChecker">
+    <input class="form-control"  type="text"[(ngModel)]="name" #ctrl="ngModel" >
+    <button class="button" (click)="setValue()">JOGAR!</button>
+  </div>
 </div>

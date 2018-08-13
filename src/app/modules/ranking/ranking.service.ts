@@ -6,6 +6,7 @@ import {AngularFireDatabase} from 'angularfire2/database';
 export class RankingService {
 
   public listRanking: BehaviorSubject<Array<any>> = new BehaviorSubject<Array<any>>([]);
+  public userScore: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   constructor (private firebase: AngularFireDatabase) {
   }
@@ -29,6 +30,30 @@ export class RankingService {
       }
       return 0;
     }).reverse();
+  }
+
+  public findByName(name: string) {
+    this.firebase
+      .list('ranking/' + name.toUpperCase())
+      .valueChanges()
+      .subscribe(value => {
+        if (value && value.length > 0 && value[1]) {
+          const valueFirebase: number = Number.parseInt(value[1].toString(), 10);
+          this.userScore.next(valueFirebase);
+        }
+      });
+  }
+
+  public setNewScore(name: string, newScore: number) {
+    if (this.userScore.getValue() >= 0 && newScore > this.userScore.getValue()) {
+      const objStore = {
+        'score': newScore,
+        'name': name.toUpperCase()
+      };
+      this.firebase
+        .list('ranking')
+        .set(name.toUpperCase(), objStore);
+    }
   }
 
 }

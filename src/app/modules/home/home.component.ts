@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {BOARD_SIZE, COLORS, CONTROLS, GAME_MODES} from './app.constants';
 import {BestScoreManager} from './app.storage.service';
+import {RankingService} from '../ranking/ranking.service';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 @Component({
   selector: 'app-home',
@@ -17,7 +19,7 @@ export class HomeComponent {
   public board = [];
   public obstacles = [];
   public score = 0;
-  public showMenuChecker = false;
+  public showMenuChecker = true;
   public gameStarted = false;
   public newBestScore = false;
   public best_score = this.bestScoreService.retrieve();
@@ -39,11 +41,30 @@ export class HomeComponent {
     x: -1,
     y: -1
   };
+  public userScore: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  public name: string = 'estagiariosemnome' + Math.floor((Math.random() * 99999999999999999999) + 1);
 
   constructor (
-    private bestScoreService: BestScoreManager
+    private bestScoreService: BestScoreManager,
+    private rankingService: RankingService,
   ) {
     this.setBoard();
+    const storageName = this.bestScoreService.retrieveName();
+    if (storageName && storageName !== '') {
+      this.name = storageName;
+      this.showMenuChecker = false;
+    }
+    this.rankingService.findByName(this.name.toUpperCase());
+    this.userScore = this.rankingService.userScore;
+  }
+
+  public setValue(name: string) {
+    if (name && name !== '' && name.length > 0) {
+      this.name = name.toUpperCase();
+    }
+    this.newGame('classic');
+    this.showMenuChecker = false;
+    this.bestScoreService.storeName(this.name);
   }
 
   handleKeyboardEvents (e: KeyboardEvent) {
@@ -216,6 +237,7 @@ export class HomeComponent {
       this.bestScoreService.store(this.score);
       this.best_score = this.score;
       this.newBestScore = true;
+      this.rankingService.setNewScore(this.name.toUpperCase(), this.score);
     }
 
     setTimeout(() => {

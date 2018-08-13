@@ -9,6 +9,14 @@ export class BestScoreManager {
     localStorage.setItem(this.ngxSnake, JSON.stringify({ 'best_score': score }));
   }
 
+  public storeName(name: string) {
+    localStorage.setItem('nameZupNake', name);
+  }
+
+  public retrieveName() {
+    return localStorage.getItem('nameZupNake');
+  }
+
   public retrieve() {
     let storage = this.parse();
     if (!storage) {
