@@ -8,6 +8,35 @@
   display: inline-block;
 }
 
+.personal-name {
+  padding: 15px 0 0 15px;
+  color: #fff;
+}
+
+.button {
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  padding: 10px 15px;
+  background: blue;
+  color: #fff;
+}
+
+.button:hover {
+  background: #6AB100;
+  color: #000000;
+  cursor: pointer;
+  border-color: #000;
+}
+
+.form-control {
+  padding: 5px 0 5px 10px;
+  border: 1px solid #6AB100;
+  border-radius: 5px;
+  width: 200px;
+  height: 26px;
+  font-size: 16px;
+}
+
 .score-block>.score {
   position: absolute;
   right: 8px;
